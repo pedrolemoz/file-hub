@@ -343,4 +343,4 @@ app.use(async (error: Error & { status?: number }, _req: Request, res: Response,
 
 await Promise.all([mkdir(publicFilePath, { recursive: true }), mkdir(privateFilePath, { recursive: true }), mkdir(temporaryPath, { recursive: true })])
 await restoreFilesFromMetadata()
-app.listen(port, '0.0.0.0', () => console.log(`FileHub listening on ${port}`))
+app.listen(port, () => console.log(`FileHub listening on ${port}`))

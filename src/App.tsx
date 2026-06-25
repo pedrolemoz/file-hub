@@ -126,7 +126,7 @@ function UploadPanel({ onUploaded }: { onUploaded: (file: FileEntry) => void }) 
         <label>Filename<input value={storedName} onChange={event => setStoredName(event.target.value)} placeholder={pendingFile?.name || 'Use original filename'} /></label>
         <label>Path<input value={routeName} onChange={event => setRouteName(event.target.value)} placeholder={`Default: ${serveMode === 'direct' ? sampleName : defaultPathName}`} /></label>
       </div>
-      <div className="link-preview">localhost:2767/{previewPath}</div>
+      <div className="link-preview">localhost:8081/{previewPath}</div>
       {error && <p className="error" role="alert">{error}</p>}
       <div className="upload-actions">
         <button className="secondary" type="button" onClick={() => inputRef.current?.click()}><Upload size={17} />Choose file</button>

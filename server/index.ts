@@ -13,7 +13,6 @@ const publicFilePath = resolve(process.env.PUBLIC_FILE_PATH ?? 'files/public')
 const privateFilePath = resolve(process.env.PRIVATE_FILE_PATH ?? 'files/private')
 const temporaryPath = resolve(process.env.TEMP_FILE_PATH ?? 'data/tmp')
 const sessionSecret = process.env.SESSION_SECRET ?? randomBytes(32).toString('hex')
-const secureCookies = process.env.NODE_ENV === 'production'
 const accessKeys = new Map<string, { scope: 'file'; fileId: string; expiresAt: number } | { scope: 'global'; expiresAt: number }>()
 const store = new Store(dataFile)
 const app = express()
@@ -45,7 +44,7 @@ function cookies(req: Request) {
 function setSession(res: Response, username: string) {
   res.cookie('filehub_session', signSession(username, sessionSecret), {
     httpOnly: true,
-    secure: secureCookies,
+    secure: false,
     sameSite: 'strict',
     path: '/',
     maxAge: 30 * 24 * 60 * 60 * 1000,

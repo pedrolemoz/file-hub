@@ -69,4 +69,4 @@ Remove the host-networked Docker resources:
 docker compose --project-name file-hub -f compose.host.yaml down --volumes --rmi all --remove-orphans
 ```
 
-For a reverse proxy, forward the public HTTPS subdomain to port `2767`. `NODE_ENV=production` makes the session cookie HTTPS-only, so keep HTTPS enabled on the public subdomain.
+For Cloudflare Tunnel or another reverse proxy, forward the public HTTPS subdomain to FileHub over plain HTTP on port `2767`. FileHub does not terminate HTTPS itself; the tunnel or proxy should handle HTTPS at the public edge.

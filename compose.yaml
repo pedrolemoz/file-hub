@@ -1,0 +1,18 @@
+services:
+  file-hub:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "${PORT:-2767}:2767"
+    environment:
+      SESSION_SECRET: ${SESSION_SECRET:?Set SESSION_SECRET in your .env file}
+      PORT: 2767
+      DATA_FILE: /app/data/file-hub.json
+      PUBLIC_FILE_PATH: /app/public-files
+      PRIVATE_FILE_PATH: /app/private-files
+    volumes:
+      - ${DATA_PATH:-./data}:/app/data
+      - ${PUBLIC_FILE_PATH:-./files/public}:/app/public-files
+      - ${PRIVATE_FILE_PATH:-./files/private}:/app/private-files
+    restart: unless-stopped

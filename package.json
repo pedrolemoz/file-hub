@@ -1,0 +1,32 @@
+{
+  "name": "file-hub",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "packageManager": "pnpm@11.5.3",
+  "scripts": {
+    "dev": "concurrently -k \"vite\" \"tsx watch server/index.ts\"",
+    "build": "tsc -b && vite build && tsc -p server/tsconfig.json",
+    "start": "node server-dist/index.js",
+    "test": "tsx --test server/*.test.ts"
+  },
+  "dependencies": {
+    "express": "^5.1.0",
+    "multer": "^2.0.2"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "latest",
+    "@types/express": "latest",
+    "@types/multer": "latest",
+    "@types/node": "latest",
+    "@types/react": "latest",
+    "@types/react-dom": "latest",
+    "concurrently": "latest",
+    "lucide-react": "latest",
+    "react": "latest",
+    "react-dom": "latest",
+    "tsx": "latest",
+    "typescript": "latest",
+    "vite": "latest"
+  }
+}

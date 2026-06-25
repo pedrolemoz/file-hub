@@ -4,10 +4,10 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - "${PORT:-2767}:2767"
+      - "8081:80"
     environment:
       SESSION_SECRET: ${SESSION_SECRET:?Set SESSION_SECRET in your .env file}
-      PORT: 2767
+      PORT: 80
       DATA_FILE: /app/data/file-hub.json
       PUBLIC_FILE_PATH: /app/public-files
       PRIVATE_FILE_PATH: /app/private-files

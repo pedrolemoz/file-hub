@@ -7,7 +7,7 @@ import multer from 'multer'
 import { defaultRouteName, hashPassword, readSession, safeFileName, safeRouteName, signSession, verifyPassword } from './security.js'
 import { Store, type FileEntry, type ServeMode, type Visibility } from './store.js'
 
-const port = Number(process.env.PORT ?? 2767)
+const port = Number(process.env.PORT ?? 8081)
 const dataFile = process.env.DATA_FILE ?? resolve('data', 'file-hub.json')
 const publicFilePath = resolve(process.env.PUBLIC_FILE_PATH ?? 'files/public')
 const privateFilePath = resolve(process.env.PRIVATE_FILE_PATH ?? 'files/private')

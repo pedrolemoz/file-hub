@@ -7,8 +7,8 @@ FileHub is a small private web server for publishing local files through clean l
 - First-run setup wizard with username/password auth
 - No password recovery path
 - Upload from a file picker or drag and drop
-- Direct links such as `http://localhost:2767/archive.zip`
-- Path links such as `http://localhost:2767/archive`
+- Direct links such as `http://localhost:8081/archive.zip`
+- Path links such as `http://localhost:8081/archive`
 - Public files download directly
 - Private files require a temporary query-string key
 - Temporary access keys expire after 5 minutes
@@ -24,7 +24,7 @@ pnpm install
 pnpm dev
 ```
 
-The app runs at [http://localhost:5173](http://localhost:5173) in development and proxies API calls to the backend on port `2767`.
+The app runs at [http://localhost:5173](http://localhost:5173) in development and proxies API calls to the backend on port `8081`.
 
 ```bash
 pnpm test
@@ -35,19 +35,13 @@ pnpm build
 
 Copy `.env.example` to `.env`, then replace `SESSION_SECRET` with a stable random value.
 
-Build and start FileHub with Docker bridge networking:
+Build and start FileHub with Docker Compose:
 
 ```bash
 docker compose --project-name file-hub up --build -d
 ```
 
-FileHub is available at [http://localhost:2767](http://localhost:2767).
-
-Or build and start FileHub with host networking:
-
-```bash
-docker compose --project-name file-hub -f compose.host.yaml up --build -d
-```
+FileHub is available at [http://localhost:8081](http://localhost:8081).
 
 The Compose file reads `.env` and mounts three host-backed volumes:
 
@@ -57,16 +51,10 @@ The Compose file reads `.env` and mounts three host-backed volumes:
 
 Each uploaded file also gets a sidecar metadata file beside it, named like `example.zip.filehub.json`. Those files contain the route mode, visibility, original filename, stored filename, MIME type, and creation time, so the file-serving configuration can be recovered from the public/private folders even if the container and main data file are removed.
 
-Remove the bridge-networked Docker resources:
+Remove the Docker resources:
 
 ```bash
 docker compose --project-name file-hub down --volumes --rmi all --remove-orphans
 ```
 
-Remove the host-networked Docker resources:
-
-```bash
-docker compose --project-name file-hub -f compose.host.yaml down --volumes --rmi all --remove-orphans
-```
-
-For Cloudflare Tunnel or another reverse proxy, forward the public HTTPS subdomain to FileHub over plain HTTP on port `2767`. FileHub does not terminate HTTPS itself; the tunnel or proxy should handle HTTPS at the public edge.
+For Cloudflare Tunnel or another reverse proxy, forward the public HTTPS subdomain to FileHub over plain HTTP on port `8081`. FileHub does not terminate HTTPS itself; the tunnel or proxy should handle HTTPS at the public edge.
